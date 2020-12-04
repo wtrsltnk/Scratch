@@ -30,6 +30,8 @@ add_executable(Scratch
     SunShadows.cpp
     texture.cpp
     glad.c
+    assets/fragment.shader
+    assets/vertex.shader
 )
 
 

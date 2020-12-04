@@ -35,7 +35,7 @@
 namespace HL1
 {
 
-	#pragma pack(4)
+    #pragma pack(push, 4)
 
 	/* BSP */
 	typedef struct sBSPLump
@@ -153,7 +153,9 @@ namespace HL1
 		unsigned char ambientLevel[MAX_AMBIENTS];
 
 	} tBSPLeaf;
-	
+
+#pragma pack(pop)
+
 }
 
 #endif	/* _BSPTYPES_H */

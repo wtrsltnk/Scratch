@@ -42,6 +42,9 @@ static Camera _camera;
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+    (void)scancode;
+    (void)mods;
+
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
@@ -56,6 +59,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 static void cursorpos_callback(GLFWwindow* window, double x, double y)
 {
+    (void)window;
+
     if (_movement[Movement::turn])
     {
         _camera.rotateDegree(y-_mouse[1], x-_mouse[0]);
@@ -67,6 +72,9 @@ static void cursorpos_callback(GLFWwindow* window, double x, double y)
 
 static void mousebutton_callback(GLFWwindow* window, int button, int action, int mods)
 {
+    (void)window;
+    (void)mods;
+
     if (button == GLFW_MOUSE_BUTTON_1)
     {
         _movement[Movement::turn] = action != GLFW_RELEASE;
@@ -75,6 +83,8 @@ static void mousebutton_callback(GLFWwindow* window, int button, int action, int
 
 static void windowsize_callback(GLFWwindow* window, int width, int height)
 {
+    (void)window;
+
     _windowSize[0] = width;
     _windowSize[1] = height;
 }
@@ -163,7 +173,6 @@ void glhPerspectivef2(float *matrix, float fovyInDegrees, float aspectRatio,
                       float znear, float zfar)
 {
     float ymax, xmax;
-    float temp, temp2, temp3, temp4;
     ymax = znear * tanf(fovyInDegrees * M_PI / 360.0);
     // ymin = -ymax;
     // xmin = -ymax * aspectRatio;
@@ -171,7 +180,7 @@ void glhPerspectivef2(float *matrix, float fovyInDegrees, float aspectRatio,
     glhFrustumf2(matrix, -xmax, xmax, -ymax, ymax, znear, zfar);
 }
 
-int main(int argc, char** argv)
+int main()
 {
     if (!glfwInit())
     {
@@ -199,8 +208,7 @@ int main(int argc, char** argv)
     glfwSwapInterval(1);
 
 	char positionPrint[256] = { 0 };
-	
-	std::set<int> visibleFaces;
+
     ui::Font font;
     int f = 1;
     _camera.position = Vector3(500, -400, 300);
@@ -369,8 +377,7 @@ int main(int argc, char** argv)
 
         glDisable(GL_DEPTH_TEST);
         glColor3f(1,1,0);
-        if (tracer->result.face >= 0)
-            data.renderFace(tracer->result.face);
+        data.renderFace(tracer->result.face);
         glEnable(GL_DEPTH_TEST);
 //*/
 		

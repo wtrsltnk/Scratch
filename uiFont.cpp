@@ -172,12 +172,12 @@ void Font::drawText(float x, float y, const char *text, unsigned int col)
         if (this->mTextureId == 0) return;
         if (!text) return;
 
-        glColor4ub(col&0xff, (col>>8)&0xff, (col>>16)&0xff, (col>>24)&0xff);
-
-        // assume orthographic projection with units = screen pixels, origin at top left
+        glFrontFace(GL_CW);
         glBindTexture(GL_TEXTURE_2D, this->mTextureId);
 
         glBegin(GL_TRIANGLES);
+
+        glColor4ub(col&0xff, (col>>8)&0xff, (col>>16)&0xff, (col>>24)&0xff);
 
         const float ox = x;
 
@@ -218,6 +218,7 @@ void Font::drawText(float x, float y, const char *text, unsigned int col)
         }
 
         glEnd();
+        glFrontFace(GL_CCW);
 }
 
 void Font::drawTextColorLess(float x, float y, const char *text)

@@ -207,7 +207,8 @@ int main(int argc, char** argv)
 
     Hl1DataManager data;
 #ifdef WIN32
-	glActiveTextureARB(GL_TEXTURE0);
+    glActiveTextureARB(GL_TEXTURE0);
+    glEnable(GL_TEXTURE_2D);
 	font.initializeFont("C:\\WINDOWS\\Fonts\\verdana.TTF", 32.0f);
 	glActiveTextureARB(GL_TEXTURE1);
     if (data.load("C:/Games/Counter-Strike1.3/cstrike/maps/de_cbble.bsp") == false)
@@ -396,8 +397,8 @@ int main(int argc, char** argv)
         glDisable(GL_DEPTH_TEST);
 
         _camera.position.toString(positionPrint);
-        font.drawText(10, 10, positionPrint, ui::RGBA(255, 255, 255));
-		
+        font.drawText(50, 50, positionPrint, ui::RGBA(255, 255, 255));
+
         glMatrixMode(GL_PROJECTION);
         glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
